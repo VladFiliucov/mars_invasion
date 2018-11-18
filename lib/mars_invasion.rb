@@ -53,6 +53,7 @@ class MarsInvasion
 
     @robots << robot
     @surface.land_robot(robot, x_position, y_position)
+    robot.set_surface(@surface)
 
     @interface.enter_sequnece_of_commands_message
     commands = @interface.sequnece_of_commands_prompt

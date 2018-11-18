@@ -65,6 +65,8 @@ class TerminalInterface
     else
       puts "================================="
       puts "Robot is facing #{robot.current_facing_direction}"
+      puts "Robot X is  #{robot.current_sector.x}"
+      puts "Robot Y is  #{robot.current_sector.y}"
       puts "================================="
     end
   end
