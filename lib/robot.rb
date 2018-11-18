@@ -11,6 +11,7 @@ class Robot
   end
 
   def lost!
+    @current_sector = nil
     @status = 'LOST'
   end
 

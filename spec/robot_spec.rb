@@ -16,12 +16,20 @@ describe Robot do
 
   describe '#lost!' do
     let(:robot) { Robot.new('N') }
+    let(:sector) { double('new sector') }
 
     it 'changes robot status to LOST' do
       expect { robot.lost! }.to change{ robot.status }.from('ACTIVE').to('LOST')
     end
 
-    it 'resets current_sector'
+    it 'resets current_sector' do
+      robot.set_sector(sector)
+
+      expect { robot.lost! }
+        .to change{ robot.current_sector }
+        .from(sector)
+        .to(nil)
+    end
   end
 
   describe '#send_signal' do
