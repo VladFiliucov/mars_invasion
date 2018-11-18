@@ -22,4 +22,20 @@ describe Sector do
       expect(sector.robots).to_not include(robot)
     end
   end
+
+  describe '#add_scent' do
+    it 'can add scent' do
+      scent = 'N'
+      sector.add_scent(scent)
+
+      expect(sector.scents).to include(scent)
+    end
+
+    it 'does not add invalid scents' do
+      scent = 11
+      sector.add_scent(scent)
+
+      expect(sector.scents).to_not include(scent)
+    end
+  end
 end
