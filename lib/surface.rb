@@ -17,7 +17,22 @@ class Surface
     end
   end
 
+  def land_robot(robot, x, y)
+    sector = find_sector({ x: x, y: y})
+
+    if sector
+      robot.set_sector(sector)
+      sector.add_robot(robot)
+    else
+      robot.lost!
+    end
+  end
+
   private
+
+  def find_sector(x:, y:)
+    @sectors.find { |sector| sector.x == x && sector.y == y }
+  end
 
   def within_limit_coordinates?(top_right_x, top_right_y)
     x_valid = (0..limits[:x]).to_a.include?(top_right_x)
