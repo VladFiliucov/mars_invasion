@@ -104,6 +104,7 @@ describe Robot do
     describe 'Forward' do
       context 'when current_secotr has scent' do
         let(:sector) { instance_double("Sector", scents: ['N']) }
+        let(:surface) { double("Surface") }
 
         it 'robot will ignore move in scent direction command' do
           robot = Robot.new('N')
@@ -115,14 +116,14 @@ describe Robot do
         it 'robot will run move in NOT scent direction command' do
           robot = Robot.new('S')
           robot.set_sector(sector)
+          robot.set_surface(surface)
 
           expect(sector).to receive(:remove_robot).with(robot)
+          expect(surface).to receive(:move_robot).with(robot)
 
           robot.send_signal('F')
         end
       end
-
-      xit 'changes robots current_sector'
     end
   end
 
@@ -157,6 +158,15 @@ describe Robot do
 
         expect(robot.forward_sector_coordinates).to eq({x: 2, y: 2})
       end
+    end
+  end
+
+  describe '#set_surface' do
+    let(:surface) { double('Surface') }
+    let(:robot) { Robot.new('N') }
+
+    it 'sets surface for the robot' do
+      expect(robot.set_surface(surface)).to be_truthy
     end
   end
 end

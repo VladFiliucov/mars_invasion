@@ -40,7 +40,13 @@ class Robot
     new_coordinates
   end
 
+  def set_surface(surface)
+    @surface = surface
+  end
+
   private
+
+  attr_reader :surface
 
   LEFT_TURN_MAPPER = {
     "N" => "W",
@@ -70,6 +76,7 @@ class Robot
   def go
     unless current_sector.scents.include?(current_facing_direction)
       @current_sector.remove_robot(self)
+      @surface.move_robot(self)
     end
   end
 end
