@@ -12,12 +12,12 @@ describe Robot do
     it 'resets current_sector'
   end
 
-  describe '#turn' do
+  describe '#send_signal' do
     describe '(left) changes robots facing direction' do
       it 'from North to West' do
         robot = Robot.new('N')
 
-        robot.turn('L')
+        robot.send_signal('L')
 
         expect(robot.current_facing_direction).to eq('W')
       end
@@ -25,7 +25,7 @@ describe Robot do
       it 'from West to South' do
         robot = Robot.new('W')
 
-        robot.turn('L')
+        robot.send_signal('L')
 
         expect(robot.current_facing_direction).to eq('S')
       end
@@ -33,7 +33,7 @@ describe Robot do
       it 'from South to East' do
         robot = Robot.new('S')
 
-        robot.turn('L')
+        robot.send_signal('L')
 
         expect(robot.current_facing_direction).to eq('E')
       end
@@ -41,7 +41,7 @@ describe Robot do
       it 'from East to North' do
         robot = Robot.new('E')
 
-        robot.turn('L')
+        robot.send_signal('L')
 
         expect(robot.current_facing_direction).to eq('N')
       end
@@ -51,7 +51,7 @@ describe Robot do
       it 'from North to East' do
         robot = Robot.new('N')
 
-        robot.turn('R')
+        robot.send_signal('R')
 
         expect(robot.current_facing_direction).to eq('E')
       end
@@ -59,7 +59,7 @@ describe Robot do
       it 'from West to North' do
         robot = Robot.new('W')
 
-        robot.turn('R')
+        robot.send_signal('R')
 
         expect(robot.current_facing_direction).to eq('N')
       end
@@ -67,7 +67,7 @@ describe Robot do
       it 'from South to West' do
         robot = Robot.new('S')
 
-        robot.turn('R')
+        robot.send_signal('R')
 
         expect(robot.current_facing_direction).to eq('W')
       end
@@ -75,11 +75,18 @@ describe Robot do
       it 'from East to South' do
         robot = Robot.new('E')
 
-        robot.turn('R')
+        robot.send_signal('R')
 
         expect(robot.current_facing_direction).to eq('S')
       end
     end
+  end
 
+  xdescribe '#go' do
+    it 'changes Robots current_sector' do
+      robot = Robot.new('E')
+
+      expect{ robot.go }.to change{robot.current_sector}
+    end
   end
 end

@@ -10,6 +10,12 @@ class Robot
     @status = 'LOST'
   end
 
+  def send_signal(signal)
+    turn(signal) if ["L", "R"].include?(signal.upcase)
+  end
+
+  private
+
   def turn(side)
     new_facing_direction = case side
       when "L"
@@ -20,8 +26,6 @@ class Robot
 
     @current_facing_direction = new_facing_direction
   end
-
-  private
 
   LEFT_TURN_MAPPER = {
     "N" => "W",
