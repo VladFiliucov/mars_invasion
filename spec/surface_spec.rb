@@ -104,6 +104,20 @@ describe Surface do
     end
 
     context 'when sector is found' do
+      let(:surface) { Surface.new }
+      let(:robot) { Robot.new('N') }
+
+      it 'robot is removed from old sector' do
+        surface.generate_sectors(4, 4)
+        surface.land_robot(robot, 3, 3)
+
+        robots_old_current_sector = robot.current_sector
+
+        surface.move_robot(robot)
+
+        expect(robots_old_current_sector.robots).to_not include(robot)
+        expect(robot.current_sector).to_not be_nil
+      end
     end
   end
 end

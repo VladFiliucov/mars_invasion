@@ -37,6 +37,10 @@ class Surface
       robot.lost!
       return
     end
+
+    robot.current_sector.remove_robot(robot)
+    next_sector.add_robot(robot)
+    robot.set_sector(next_sector)
   end
 
   private
