@@ -2,6 +2,7 @@ class Sector
   attr_reader :x, :y, :scents, :robots
 
   def initialize(x, y)
+    @x, @y = x, y
     @robots = []
     @scents = []
   end

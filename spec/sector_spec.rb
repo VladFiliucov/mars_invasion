@@ -5,6 +5,13 @@ describe Sector do
   let(:sector) { Sector.new(2, 2) }
   let(:robot) { double('Robot') }
 
+  it 'assigns coordinates correctly' do
+    sector = Sector.new(1, 3)
+
+    expect(sector.x).to eq(1)
+    expect(sector.y).to eq(3)
+  end
+
   describe '#add_robot' do
     it 'can add robot' do
       sector.add_robot(robot)
