@@ -18,6 +18,25 @@ class Robot
     turn(signal) if ["L", "R"].include?(signal.upcase)
   end
 
+  def forward_sector_coordinates
+    new_coordinates = {
+      x: current_sector.x,
+      y: current_sector.y
+    }
+    case current_facing_direction
+    when "N"
+      new_coordinates[:x] += 1
+    when "S"
+      new_coordinates[:x] -= 1
+    when "E"
+      new_coordinates[:y] += 1
+    when "W"
+      new_coordinates[:y] -= 1
+    end
+
+    new_coordinates
+  end
+
   private
 
   def turn(side)

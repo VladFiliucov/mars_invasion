@@ -93,8 +93,42 @@ describe Robot do
       end
     end
 
-    describe 'Forward' do
+    xdescribe 'Forward' do
       it 'changes robots current_sector' do
+      end
+    end
+  end
+
+  describe '#forward_sector_coordinates' do
+    context 'based on robot facing direction' do
+      let(:sector) { instance_double("Sector", x: 2, y: 3) }
+
+      it 'calculates 1 to north sector coordinates' do
+        robot = Robot.new('N')
+        robot.set_sector(sector)
+
+        expect(robot.forward_sector_coordinates).to eq({x: 3, y: 3})
+      end
+
+      it 'calculates 1 to east sector coordinates' do
+        robot = Robot.new('E')
+        robot.set_sector(sector)
+
+        expect(robot.forward_sector_coordinates).to eq({x: 2, y: 4})
+      end
+
+      it 'calculates 1 to south sector coordinates' do
+        robot = Robot.new('S')
+        robot.set_sector(sector)
+
+        expect(robot.forward_sector_coordinates).to eq({x: 1, y: 3})
+      end
+
+      it 'calculates 1 to west sector coordinates' do
+        robot = Robot.new('W')
+        robot.set_sector(sector)
+
+        expect(robot.forward_sector_coordinates).to eq({x: 2, y: 2})
       end
     end
   end
