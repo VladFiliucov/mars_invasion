@@ -11,12 +11,29 @@ class Robot
   end
 
   def turn(side)
-    @current_facing_direction =
-      case current_facing_direction
-      when 'N' then 'W'
-      when 'W' then 'S'
-      when 'S' then 'E'
-      when 'E' then 'N'
+    new_facing_direction = case side
+      when "L"
+        LEFT_TURN_MAPPER.fetch(current_facing_direction)
+      when "R"
+        RIGHT_TURN_MAPPER.fetch(current_facing_direction)
       end
+
+    @current_facing_direction = new_facing_direction
   end
+
+  private
+
+  LEFT_TURN_MAPPER = {
+    "N" => "W",
+    "W" => "S",
+    "S" => "E",
+    "E" => "N"
+  }
+
+  RIGHT_TURN_MAPPER = {
+    "N" => "E",
+    "W" => "N",
+    "S" => "W",
+    "E" => "S"
+  }
 end

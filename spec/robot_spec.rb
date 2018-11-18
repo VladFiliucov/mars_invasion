@@ -13,7 +13,7 @@ describe Robot do
   end
 
   describe '#turn' do
-    describe 'changes robots facing direction' do
+    describe '(left) changes robots facing direction' do
       it 'from North to West' do
         robot = Robot.new('N')
 
@@ -46,5 +46,40 @@ describe Robot do
         expect(robot.current_facing_direction).to eq('N')
       end
     end
+
+    describe '(right) changes robots facing direction' do
+      it 'from North to East' do
+        robot = Robot.new('N')
+
+        robot.turn('R')
+
+        expect(robot.current_facing_direction).to eq('E')
+      end
+
+      it 'from West to North' do
+        robot = Robot.new('W')
+
+        robot.turn('R')
+
+        expect(robot.current_facing_direction).to eq('N')
+      end
+
+      it 'from South to West' do
+        robot = Robot.new('S')
+
+        robot.turn('R')
+
+        expect(robot.current_facing_direction).to eq('W')
+      end
+
+      it 'from East to South' do
+        robot = Robot.new('E')
+
+        robot.turn('R')
+
+        expect(robot.current_facing_direction).to eq('S')
+      end
+    end
+
   end
 end
