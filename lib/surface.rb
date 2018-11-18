@@ -28,6 +28,17 @@ class Surface
     end
   end
 
+  def move_robot(robot)
+    next_sector = find_sector(robot.forward_sector_coordinates)
+
+    unless next_sector
+      robot.current_sector.add_scent(robot.current_facing_direction)
+      robot.current_sector.remove_robot(robot)
+      robot.lost!
+      return
+    end
+  end
+
   private
 
   def find_sector(x:, y:)

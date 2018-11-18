@@ -64,4 +64,46 @@ describe Surface do
       end
     end
   end
+
+  describe '#move_robot' do
+    let(:surface) { Surface.new }
+    let(:robot) { Robot.new('N') }
+
+    context 'when there is no next sector' do
+      it 'robot is lost' do
+        surface.generate_sectors(4, 4)
+        surface.land_robot(robot, 4, 4)
+
+        surface.move_robot(robot)
+
+        expect(robot.status).to eq('LOST')
+      end
+
+      it 'secotor does not have robot anymore' do
+        surface.generate_sectors(4, 4)
+        surface.land_robot(robot, 4, 4)
+
+        robots_current_sector = robot.current_sector
+
+        surface.move_robot(robot)
+
+        expect(robots_current_sector.robots).to_not include(robot)
+      end
+
+      it 'adds scent to sector' do
+        surface.generate_sectors(4, 4)
+        surface.land_robot(robot, 4, 4)
+
+        robots_current_sector = robot.current_sector
+
+        surface.move_robot(robot)
+
+        expect(robots_current_sector.scents)
+          .to include(robot.current_facing_direction)
+      end
+    end
+
+    context 'when sector is found' do
+    end
+  end
 end
