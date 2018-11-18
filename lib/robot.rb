@@ -11,6 +11,12 @@ class Robot
   end
 
   def turn(side)
-    @current_facing_direction = 'W'
+    @current_facing_direction =
+      case current_facing_direction
+      when 'N' then 'W'
+      when 'W' then 'S'
+      when 'S' then 'E'
+      when 'E' then 'N'
+      end
   end
 end

@@ -21,6 +21,30 @@ describe Robot do
 
         expect(robot.current_facing_direction).to eq('W')
       end
+
+      it 'from West to South' do
+        robot = Robot.new('W')
+
+        robot.turn('L')
+
+        expect(robot.current_facing_direction).to eq('S')
+      end
+
+      it 'from South to East' do
+        robot = Robot.new('S')
+
+        robot.turn('L')
+
+        expect(robot.current_facing_direction).to eq('E')
+      end
+
+      it 'from East to North' do
+        robot = Robot.new('E')
+
+        robot.turn('L')
+
+        expect(robot.current_facing_direction).to eq('N')
+      end
     end
   end
 end
