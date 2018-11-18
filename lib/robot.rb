@@ -1,9 +1,13 @@
 class Robot
-  attr_reader :status, :current_facing_direction
+  attr_reader :status, :current_facing_direction, :current_sector
 
   def initialize(current_facing_direction)
     @status = 'ACTIVE'
     @current_facing_direction = current_facing_direction
+  end
+
+  def set_sector(sector)
+    @current_sector = sector
   end
 
   def lost!

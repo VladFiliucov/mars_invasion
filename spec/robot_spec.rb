@@ -2,6 +2,18 @@ require 'spec_helper';
 require_relative '../lib/robot';
 
 describe Robot do
+  describe '#set_sector' do
+    let(:robot) { Robot.new('N') }
+
+    it 'sets current_sector' do
+      sector = double('new sector')
+
+      robot.set_sector(sector)
+
+      expect(robot.current_sector).to eq(sector)
+    end
+  end
+
   describe '#lost!' do
     let(:robot) { Robot.new('N') }
 
@@ -80,13 +92,10 @@ describe Robot do
         expect(robot.current_facing_direction).to eq('S')
       end
     end
-  end
 
-  xdescribe '#go' do
-    it 'changes Robots current_sector' do
-      robot = Robot.new('E')
-
-      expect{ robot.go }.to change{robot.current_sector}
+    describe 'Forward' do
+      it 'changes robots current_sector' do
+      end
     end
   end
 end
