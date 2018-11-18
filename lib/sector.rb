@@ -10,5 +10,6 @@ class Sector
   end
 
   def remove_robot(robot)
+    @robots.delete(robot)
   end
 end
