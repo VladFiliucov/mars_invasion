@@ -101,9 +101,28 @@ describe Robot do
       end
     end
 
-    xdescribe 'Forward' do
-      it 'changes robots current_sector' do
+    describe 'Forward' do
+      context 'when current_secotr has scent' do
+        let(:sector) { instance_double("Sector", scents: ['N']) }
+
+        it 'robot will ignore move in scent direction command' do
+          robot = Robot.new('N')
+          robot.set_sector(sector)
+
+          expect(robot.send_signal('F')).to be_nil
+        end
+
+        it 'robot will run move in NOT scent direction command' do
+          robot = Robot.new('S')
+          robot.set_sector(sector)
+
+          expect(sector).to receive(:remove_robot).with(robot)
+
+          robot.send_signal('F')
+        end
       end
+
+      xit 'changes robots current_sector'
     end
   end
 

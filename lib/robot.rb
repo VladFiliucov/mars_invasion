@@ -16,7 +16,9 @@ class Robot
   end
 
   def send_signal(signal)
-    turn(signal) if ["L", "R"].include?(signal.upcase)
+    return turn(signal) if ["L", "R"].include?(signal.upcase)
+
+    go
   end
 
   def forward_sector_coordinates
@@ -40,17 +42,6 @@ class Robot
 
   private
 
-  def turn(side)
-    new_facing_direction = case side
-      when "L"
-        LEFT_TURN_MAPPER.fetch(current_facing_direction)
-      when "R"
-        RIGHT_TURN_MAPPER.fetch(current_facing_direction)
-      end
-
-    @current_facing_direction = new_facing_direction
-  end
-
   LEFT_TURN_MAPPER = {
     "N" => "W",
     "W" => "S",
@@ -64,4 +55,21 @@ class Robot
     "S" => "W",
     "E" => "S"
   }
+
+  def turn(side)
+    new_facing_direction = case side
+      when "L"
+        LEFT_TURN_MAPPER.fetch(current_facing_direction)
+      when "R"
+        RIGHT_TURN_MAPPER.fetch(current_facing_direction)
+      end
+
+    @current_facing_direction = new_facing_direction
+  end
+
+  def go
+    unless current_sector.scents.include?(current_facing_direction)
+      @current_sector.remove_robot(self)
+    end
+  end
 end
