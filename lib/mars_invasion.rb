@@ -52,12 +52,13 @@ class MarsInvasion
     robot = Robot.new(facing_direction)
 
     @robots << robot
-    @surface.land_robot(robot, x_position, y_position)
     robot.set_surface(@surface)
+    @surface.land_robot(robot, x_position, y_position)
 
     @interface.enter_sequnece_of_commands_message
     commands = @interface.sequnece_of_commands_prompt
     execute_commands(robot, commands)
+    @interface.display_robot_info(robot)
   end
 
   def robots_info
@@ -69,6 +70,8 @@ class MarsInvasion
   def execute_commands(robot, commands)
     commands_array = normalize_commands(commands)
     commands_array.each do |command|
+      break if robot.lost?
+
       robot.send_signal(command)
     end
   end

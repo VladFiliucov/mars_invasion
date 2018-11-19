@@ -58,9 +58,14 @@ class TerminalInterface
   end
 
   def display_robot_info(robot)
-    if robot.status == 'LOST'
+    if robot.lost? && robot.lost_sector.nil?
+      puts "================================="
+      puts "This robot missed the planet"
+      puts "================================="
+    elsif robot.lost?
       puts "================================="
       puts "Robot Lost"
+      puts "Last coordinates X: #{robot.lost_sector.x} Y: #{robot.lost_sector.y}"
       puts "================================="
     else
       puts "================================="

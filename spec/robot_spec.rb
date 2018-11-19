@@ -22,20 +22,25 @@ describe Robot do
       expect { robot.lost! }.to change{ robot.status }.from('ACTIVE').to('LOST')
     end
 
-    it 'resets current_sector' do
-      robot.set_sector(sector)
-
-      expect { robot.lost! }
-        .to change{ robot.current_sector }
-        .from(sector)
-        .to(nil)
-    end
-
     it 'sets lost_sector to current_sector' do
       robot.set_sector(sector)
       robot.lost!
 
       expect(robot.lost_sector).to eq(sector)
+    end
+  end
+
+  describe '#reset_current_sector' do
+    let(:robot) { Robot.new('N') }
+    let(:sector) { double('new sector') }
+
+    it 'resets current_sector' do
+      robot.set_sector(sector)
+
+      expect { robot.reset_current_sector }
+        .to change{ robot.current_sector }
+        .from(sector)
+        .to(nil)
     end
   end
 
@@ -125,7 +130,6 @@ describe Robot do
           robot.set_sector(sector)
           robot.set_surface(surface)
 
-          expect(sector).to receive(:remove_robot).with(robot)
           expect(surface).to receive(:move_robot).with(robot)
 
           robot.send_signal('F')

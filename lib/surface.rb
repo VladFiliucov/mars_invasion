@@ -33,8 +33,9 @@ class Surface
 
     unless next_sector
       robot.current_sector.add_scent(robot.current_facing_direction)
-      robot.current_sector.remove_robot(robot)
       robot.lost!
+      robot.current_sector.remove_robot(robot)
+      robot.reset_current_sector
       return
     end
 

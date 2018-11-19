@@ -12,8 +12,11 @@ class Robot
 
   def lost!
     @lost_sector = @current_sector
-    @current_sector = nil
     @status = 'LOST'
+  end
+
+  def reset_current_sector
+    @current_sector = nil
   end
 
   def send_signal(signal)
@@ -80,7 +83,6 @@ class Robot
 
   def go
     unless current_sector.scents.include?(current_facing_direction)
-      @current_sector.remove_robot(self)
       @surface.move_robot(self)
     end
   end
