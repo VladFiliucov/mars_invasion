@@ -1,5 +1,5 @@
 class Robot
-  attr_reader :status, :current_facing_direction, :current_sector
+  attr_reader :status, :current_facing_direction, :current_sector, :lost_sector
 
   def initialize(current_facing_direction)
     @status = 'ACTIVE'
@@ -11,6 +11,7 @@ class Robot
   end
 
   def lost!
+    @lost_sector = @current_sector
     @current_sector = nil
     @status = 'LOST'
   end
@@ -42,6 +43,10 @@ class Robot
 
   def set_surface(surface)
     @surface = surface
+  end
+
+  def lost?
+    status == 'LOST'
   end
 
   private

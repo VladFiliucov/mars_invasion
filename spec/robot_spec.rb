@@ -30,6 +30,13 @@ describe Robot do
         .from(sector)
         .to(nil)
     end
+
+    it 'sets lost_sector to current_sector' do
+      robot.set_sector(sector)
+      robot.lost!
+
+      expect(robot.lost_sector).to eq(sector)
+    end
   end
 
   describe '#send_signal' do
